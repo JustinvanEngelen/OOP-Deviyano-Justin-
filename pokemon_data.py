@@ -1,6 +1,13 @@
+name=""
+
 charmander={
     "name": "Charmander",
-    "type": "Fire",
+    "strength": "Fire",
     "weakness": "Water",
-    "battle_cry": "Charmander!",
+}
+
+pikachu={
+    "name": "Pikachu",
+    "strength": "Electric",
+    "weakness": "Ground",
 }
