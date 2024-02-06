@@ -1,4 +1,3 @@
-name=""
 
 charmander={
     "name": "Charmander",
