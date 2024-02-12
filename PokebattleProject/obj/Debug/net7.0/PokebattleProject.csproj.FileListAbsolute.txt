@@ -1,0 +1,15 @@
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/bin/Debug/net7.0/PokebattleProject
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/bin/Debug/net7.0/PokebattleProject.deps.json
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/bin/Debug/net7.0/PokebattleProject.runtimeconfig.json
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/bin/Debug/net7.0/PokebattleProject.dll
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/bin/Debug/net7.0/PokebattleProject.pdb
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.csproj.AssemblyReference.cache
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.AssemblyInfoInputs.cache
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.AssemblyInfo.cs
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.csproj.CoreCompileInputs.cache
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.dll
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/refint/PokebattleProject.dll
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.pdb
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/PokebattleProject.genruntimeconfig.cache
+/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/Debug/net7.0/ref/PokebattleProject.dll
