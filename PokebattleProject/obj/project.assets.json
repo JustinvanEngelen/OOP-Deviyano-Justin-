@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/PokebattleProject.csproj",
+      "projectUniqueName": "/Users/justinvanengelen/Projects/OOP-Deviyano-Justin-/PokebattleProject/PokebattleProject.csproj",
       "projectName": "PokebattleProject",
-      "projectPath": "/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/PokebattleProject.csproj",
+      "projectPath": "/Users/justinvanengelen/Projects/OOP-Deviyano-Justin-/PokebattleProject/PokebattleProject.csproj",
       "packagesPath": "/Users/justinvanengelen/.nuget/packages/",
-      "outputPath": "/Users/justinvanengelen/Projects/Pokebattlesolution/PokebattleProject/obj/",
+      "outputPath": "/Users/justinvanengelen/Projects/OOP-Deviyano-Justin-/PokebattleProject/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/justinvanengelen/.nuget/NuGet/NuGet.Config"
