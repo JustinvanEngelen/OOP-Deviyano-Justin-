@@ -1,44 +1,61 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Pokemon Battle Simulator");
+﻿using System;
 
-
-var c = new Charmander("Fireball");
-c.battlecry();
-
-while (true)
+class Program
 {
-    Console.WriteLine("Welke naam? Type 'quit' to quit");
-    string answer = Console.ReadLine();
-
-    if (answer == "quit")
+    static void Main()
     {
-        Console.WriteLine("dankuwel voor het spelen");
-        break;
-    }
-    c.nickname = answer;
+        Console.WriteLine("Pokemon Battle Simulator");
+        Charmander c = new Charmander("Fireball");
+        c.Battlecry();
+        bool opnieuw = true;
 
-    for (int teller = 0; teller < 11; teller++)
-    {
-        c.battlecry();
+        while (true)
+        {
+            while (opnieuw)
+            {
+                Console.WriteLine("Welke naam? Type 'quit' to quit");
+                string answer = Console.ReadLine();
+
+                if (answer == "quit")
+                {
+                    Console.WriteLine("Dankuwel voor het spelen");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(answer))
+                {
+                    Console.WriteLine("Je hebt geen naam ingevoerd, dat kan niet.");
+                    continue;
+                }
+                else
+                {
+                    c.Nickname = answer;
+                    opnieuw = false;
+                }
+
+                for (int teller = 0; teller < 11; teller++)
+                {
+                    c.Battlecry();
+                }
+            }
+        }
     }
 }
 
 public class Charmander
 {
-    public string? nickname;
-    public string strenght;
-    public string weakness;
+    public string Nickname;
+    public string Strength;
+    public string Weakness;
 
     public Charmander(string newNickname)
     {
-        this.nickname = newNickname;
-        this.strenght = "fire";
-        this.weakness = "water";
+        this.Nickname = newNickname;
+        this.Strength = "fire";
+        this.Weakness = "water";
     }
 
-    public void battlecry()
+    public void Battlecry()
     {
-        Console.WriteLine(this.nickname.ToUpper());
+        Console.WriteLine(this.Nickname.ToUpper());
     }
-
 }
