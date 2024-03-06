@@ -1,177 +1,208 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Pokemon Battle Simulator");
+﻿using System;
+using System.Collections.Generic;
 
-var trainer1Name = GetValidName("Enter the name for Trainer 1: ");
-var trainer1 = new Trainer(trainer1Name);
-
-var trainer2Name = GetValidName("Enter the name for Trainer 2: ");
-var trainer2 = new Trainer(trainer2Name);
-
-trainer1.TakePokeball(new Pokeball(new Pokemon("Charmander")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Squirtle")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Bulbassaur")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Charmander")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Squirtle")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Bulbassaur")));
-
-trainer1.TakePokeball(new Pokeball(new Pokemon("Charmander")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Squirtle")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Bulbassaur")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Charmander")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Squirtle")));
-trainer1.TakePokeball(new Pokeball(new Pokemon("Bulbassaur")));
-while (true)
+class Program
 {
-    for (int x = 0; x < trainer1.Belt.Count; x++)
+    static void Main()
     {
-        trainer1.ThrowPokeball();
-        trainer1.ReturnPokemon(trainer1.Belt[x].Pokemon);
-        trainer2.ThrowPokeball();
-        trainer2.ReturnPokemon(trainer2.Belt[x].Pokemon);
-    }
+        Console.WriteLine("***************************************");
+        Console.WriteLine("Welcome to the Pokemon Battle Simulator");
+        Console.WriteLine("***************************************");
+        Console.WriteLine("");
 
-    Console.WriteLine("Do you want to play again?");
-    string answer = Console.ReadLine();
-    if (answer?.ToLower() == "no")
-    {
-        break;
-    }
-    else
-    {
-        trainer1.ResetTeller();
-        trainer2.ResetTeller();
-    }
-}
+        var trainer1 = new Trainer();
+        trainer1.SetName();
 
-string GetValidName(string prompt)
-{
-    string name;
-    do
-    {
-        Console.Write(prompt);
-        name = Console.ReadLine()?.Trim();
+        Console.WriteLine("Now for the second trainer.");
+        Console.WriteLine("");
+        var trainer2 = new Trainer();
+        trainer2.SetName();
 
-        if (string.IsNullOrEmpty(name))
+        var squirtleNames = new string[] { "squirtle1", "squirtle2", "squirtle3", "squirtle4", "squirtle5", "squirtle6" };
+        var bulbaNames = new string[] { "bulba1", "bulba2", "bulba3", "bulba4", "bulba5", "bulba6" };
+
+        for (int i = 0; i < 6; i++)
         {
-            Console.WriteLine("Error: Name cannot be empty. Please enter a valid name.");
+            trainer1.takePokeball(new Pokeball(new Squirtle(squirtleNames[i])));
+            trainer2.takePokeball(new Pokeball(new Bulbasaur(bulbaNames[i])));
         }
-    } while (string.IsNullOrEmpty(name));
-    return name;
+
+        while (true)
+        {
+            for (int x = 0; x < trainer1.belt.Count; x++)
+            {
+                trainer1.throwPokeball();
+                trainer1.returnPokemon(trainer1.belt[x].Pokemon);
+                trainer2.throwPokeball();
+                trainer2.returnPokemon(trainer2.belt[x].Pokemon);
+            }
+
+            string answer;
+            while (true)
+            {
+                Console.WriteLine("Do you want to play again? (yes/no)");
+                answer = Console.ReadLine().ToLower();
+
+                if (answer == "no" || answer == "yes")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter 'yes' or 'no'.");
+                }
+            }
+
+            if (answer == "no")
+            {
+                break;
+            }
+            else
+            {
+                trainer1.teller = 0;
+                trainer2.teller = 0;
+            }
+        }
+    }
 }
 
 public class Pokemon
 {
-    public string? Nickname;
-    public string Strength;
-    public string Weakness;
+    public string? nickname;
+    public string? strength;
+    public string? weakness;
 
-    public Pokemon(string nickname)
+
+    public Pokemon(string newNickname)
     {
-        Nickname = nickname;
+        this.nickname = newNickname;
     }
 
-    public void BattleCry()
+    public virtual void BattleCry()
     {
         Console.WriteLine(GetName().ToUpper());
     }
 
     public string GetName()
     {
-        return Nickname ?? "Unnamed";
-    }
-}
-
-public class Charmander : Pokemon
-{
-    public Charmander(string nickname) : base(nickname)
-    {
-        Strength = "Fire";
-        Weakness = "Water";
+        return this.nickname;
     }
 }
 
 public class Squirtle : Pokemon
 {
+    
+
     public Squirtle(string nickname) : base(nickname)
     {
-        Strength = "Water";
-        Weakness = "Grass";
+        this.strength = "water";
+        this.weakness = "leaf";
+    }
+
+    public override void BattleCry()
+    {
+        base.BattleCry();
+        Console.WriteLine("Squirtle's Battle Cry: Squirtle, Squirtle!");
     }
 }
 
 public class Bulbasaur : Pokemon
 {
+    
+
     public Bulbasaur(string nickname) : base(nickname)
     {
-        Strength = "Grass";
-        Weakness = "Fire";
+        this.strength = "grass";
+        this.weakness = "fire";
+    }
+
+    public override void BattleCry()
+    {
+        base.BattleCry();
+        Console.WriteLine("Bulbasaur's Battle Cry: Bulba, Bulba!");
     }
 }
-
-
-
 
 public class Pokeball
 {
     public Pokemon? Pokemon;
-    public bool HasPokemonInside;
+    public bool hasPokemonInside;
 
     public Pokeball(Pokemon pokemon)
     {
-        Pokemon = pokemon;
-        HasPokemonInside = true;
+        this.Pokemon = pokemon;
+        this.hasPokemonInside = true;
     }
 
     public object Open()
     {
-        HasPokemonInside = false;
+        hasPokemonInside = false;
         return Pokemon;
     }
 
     public void Close()
     {
-        HasPokemonInside = true;
+        hasPokemonInside = true;
     }
 }
 
 public class Trainer
 {
-    public List<Pokeball> Belt;
-    public string? Name;
-    public int Teller = 0;
+    public List<Pokeball> belt;
+    public string? name;
+    public int teller = 0;
 
-    public Trainer(string name)
+    public Trainer()
     {
-        Belt = new List<Pokeball>();
-        Name = name;
+        this.belt = new List<Pokeball>();
     }
 
-    public void TakePokeball(Pokeball pokeball)
+    public void SetName()
     {
-        if (Belt.Count >= 6)
+        string new_name = "";
+        while (string.IsNullOrEmpty(new_name))
         {
-            Console.WriteLine(Belt.Count);
-            throw new Exception("Cannot have more than 6 Pokemon on your belt!");
+            Console.WriteLine("Enter a name for the trainer :");
+            string name = Console.ReadLine();
+            if (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("I'm sorry, but an empty name is not possible. Please try again.");
+            }
+            else if (name.Length > 10)
+            {
+                Console.WriteLine("I'm sorry, but the name cannot be longer than 10 characters. Please try again.");
+            }
+            else
+            {
+                Console.WriteLine("Good choice");
+                Console.WriteLine("");
+                new_name = name;
+            }
         }
-        else
-        {
-            Belt.Add(pokeball);
-        }
+        this.name = new_name;
     }
 
-    public void ThrowPokeball()
+    public string GetName()
     {
-        Console.WriteLine($"{Name}'s Pokemon says: {Belt[Teller].Pokemon?.GetName()}");
-        Teller++;
+        return this.name;
     }
 
-    public void ReturnPokemon(Pokemon pokemon)
+    public void takePokeball(Pokeball pokeball)
     {
-        Console.WriteLine($"{Name} Returns: {pokemon.GetName()}");
+        if (belt.Count >= 6) { Console.WriteLine(belt.Count); throw new Exception("Kan niet meer dan 6 Pokemons hebben op uw belt!"); }
+        else { belt.Add(pokeball); }
     }
 
-    public void ResetTeller()
+    public Pokemon throwPokeball()
     {
-        Teller = 0;
+        Console.WriteLine(name + "'s Pokemon says: " + belt[teller].Pokemon.GetName());
+        teller = teller + 1;
+        return belt[teller - 1].Pokemon;
+    }
+
+    public void returnPokemon(Pokemon pokemon)
+    {
+        Console.WriteLine(name + " Returns: " + pokemon.GetName());
+       
     }
 }
