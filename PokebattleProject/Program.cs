@@ -20,21 +20,42 @@ class Program
 
         var squirtleNames = new string[] { "squirtle1", "squirtle2", "squirtle3", "squirtle4", "squirtle5", "squirtle6" };
         var bulbaNames = new string[] { "bulba1", "bulba2", "bulba3", "bulba4", "bulba5", "bulba6" };
+        var charNames = new string[] { "char1", "char2", "char3", "char4", "char5", "char6" };
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 2; i++)
         {
             trainer1.takePokeball(new Pokeball(new Squirtle(squirtleNames[i])));
+            trainer2.takePokeball(new Pokeball(new Squirtle(squirtleNames[i])));
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            trainer1.takePokeball(new Pokeball(new Bulbasaur(bulbaNames[i])));
             trainer2.takePokeball(new Pokeball(new Bulbasaur(bulbaNames[i])));
         }
 
+        for (int i = 0; i < 2; i++)
+        {
+            trainer1.takePokeball(new Pokeball(new Charmander(charNames[i])));
+            trainer2.takePokeball(new Pokeball(new Charmander(charNames[i])));
+        }
+
+
         while (true)
         {
-            for (int x = 0; x < trainer1.belt.Count; x++)
+            for (int x = 0; x < trainer1.belt.Count || x < trainer2.belt.Count; x++)
             {
-                trainer1.throwPokeball();
-                trainer1.returnPokemon(trainer1.belt[x].Pokemon);
-                trainer2.throwPokeball();
-                trainer2.returnPokemon(trainer2.belt[x].Pokemon);
+                if (x < trainer1.belt.Count)
+                {
+                    trainer1.throwPokeball();
+                    trainer1.returnPokemon(trainer1.belt[x].Pokemon);
+                }
+
+                if (x < trainer2.belt.Count)
+                {
+                    trainer2.throwPokeball();
+                    trainer2.returnPokemon(trainer2.belt[x].Pokemon);
+                }
             }
 
             string answer;
@@ -66,22 +87,18 @@ class Program
     }
 }
 
-public class Pokemon
+public abstract class Pokemon
 {
     public string? nickname;
     public string? strength;
     public string? weakness;
-
 
     public Pokemon(string newNickname)
     {
         this.nickname = newNickname;
     }
 
-    public virtual void BattleCry()
-    {
-        Console.WriteLine(GetName().ToUpper());
-    }
+    public abstract void BattleCry();
 
     public string GetName()
     {
@@ -91,8 +108,6 @@ public class Pokemon
 
 public class Squirtle : Pokemon
 {
-    
-
     public Squirtle(string nickname) : base(nickname)
     {
         this.strength = "water";
@@ -101,15 +116,13 @@ public class Squirtle : Pokemon
 
     public override void BattleCry()
     {
-        base.BattleCry();
+        Console.WriteLine(GetName().ToUpper());
         Console.WriteLine("Squirtle's Battle Cry: Squirtle, Squirtle!");
     }
 }
 
 public class Bulbasaur : Pokemon
 {
-    
-
     public Bulbasaur(string nickname) : base(nickname)
     {
         this.strength = "grass";
@@ -118,8 +131,23 @@ public class Bulbasaur : Pokemon
 
     public override void BattleCry()
     {
-        base.BattleCry();
+        Console.WriteLine(GetName().ToUpper());
         Console.WriteLine("Bulbasaur's Battle Cry: Bulba, Bulba!");
+    }
+}
+
+public class Charmander : Pokemon
+{
+    public Charmander(string nickname) : base(nickname)
+    {
+        this.strength = "fire";
+        this.weakness = "water";
+    }
+
+    public override void BattleCry()
+    {
+        Console.WriteLine(GetName().ToUpper());
+        Console.WriteLine("Charmander's Battle Cry: Char, Char!");
     }
 }
 
@@ -189,7 +217,7 @@ public class Trainer
 
     public void takePokeball(Pokeball pokeball)
     {
-        if (belt.Count >= 6) { Console.WriteLine(belt.Count); throw new Exception("Kan niet meer dan 6 Pokemons hebben op uw belt!"); }
+        if (belt.Count >= 12) { Console.WriteLine(belt.Count); throw new Exception("Cannot have more than 12 Pokemons on your belt!"); }
         else { belt.Add(pokeball); }
     }
 
@@ -203,6 +231,5 @@ public class Trainer
     public void returnPokemon(Pokemon pokemon)
     {
         Console.WriteLine(name + " Returns: " + pokemon.GetName());
-       
     }
 }

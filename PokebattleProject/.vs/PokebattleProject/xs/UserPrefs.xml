@@ -4,14 +4,15 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Program.cs" Line="168" Column="1" />
-      <File FileName="../../../Desktop/Pokemons_Battle.cs/Pokemons_Battle.cs/Program.cs" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="206" Column="8" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="PokebattleProject">
-            <Node name="PokebattleProject" expanded="True" />
+            <Node name="PokebattleProject">
+              <Node name="Program.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
