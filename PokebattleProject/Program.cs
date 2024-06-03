@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 class Program
 {
@@ -10,54 +11,35 @@ class Program
         Console.WriteLine("***************************************");
         Console.WriteLine("");
 
-        var trainer1 = new Trainer();
-        trainer1.SetName();
-
-        Console.WriteLine("Now for the second trainer.");
-        Console.WriteLine("");
-        var trainer2 = new Trainer();
-        trainer2.SetName();
-
-        var squirtleNames = new string[] { "squirtle1", "squirtle2", "squirtle3", "squirtle4", "squirtle5", "squirtle6" };
-        var bulbaNames = new string[] { "bulba1", "bulba2", "bulba3", "bulba4", "bulba5", "bulba6" };
-        var charNames = new string[] { "char1", "char2", "char3", "char4", "char5", "char6" };
-
-        for (int i = 0; i < 2; i++)
-        {
-            trainer1.takePokeball(new Pokeball(new Squirtle(squirtleNames[i])));
-            trainer2.takePokeball(new Pokeball(new Squirtle(squirtleNames[i])));
-        }
-
-        for (int i = 0; i < 2; i++)
-        {
-            trainer1.takePokeball(new Pokeball(new Bulbasaur(bulbaNames[i])));
-            trainer2.takePokeball(new Pokeball(new Bulbasaur(bulbaNames[i])));
-        }
-
-        for (int i = 0; i < 2; i++)
-        {
-            trainer1.takePokeball(new Pokeball(new Charmander(charNames[i])));
-            trainer2.takePokeball(new Pokeball(new Charmander(charNames[i])));
-        }
-
-
         while (true)
         {
-            for (int x = 0; x < trainer1.belt.Count || x < trainer2.belt.Count; x++)
-            {
-                if (x < trainer1.belt.Count)
-                {
-                    trainer1.throwPokeball();
-                    trainer1.returnPokemon(trainer1.belt[x].Pokemon);
-                }
 
-                if (x < trainer2.belt.Count)
-                {
-                    trainer2.throwPokeball();
-                    trainer2.returnPokemon(trainer2.belt[x].Pokemon);
-                }
-            }
+            var trainer1 = new Trainer();
+            trainer1.SetName();
 
+            Console.WriteLine("Now for the second trainer.");
+            Console.WriteLine("");
+            var trainer2 = new Trainer();
+            trainer2.SetName();
+
+            trainer1.takePokeball(new Pokeball(new Squirtle("squirtle1")));
+            trainer2.takePokeball(new Pokeball(new Squirtle("squirtle2")));
+            trainer1.takePokeball(new Pokeball(new Squirtle("squirtle3")));
+            trainer2.takePokeball(new Pokeball(new Squirtle("squirtle4")));
+            trainer1.takePokeball(new Pokeball(new Bulbasaur("bulba1")));
+            trainer2.takePokeball(new Pokeball(new Bulbasaur("bulba2")));
+            trainer1.takePokeball(new Pokeball(new Bulbasaur("bulba3")));
+            trainer2.takePokeball(new Pokeball(new Bulbasaur("bulba4")));
+            trainer1.takePokeball(new Pokeball(new Charmander("char1")));
+            trainer2.takePokeball(new Pokeball(new Charmander("char2")));
+            trainer1.takePokeball(new Pokeball(new Charmander("char3")));
+            trainer2.takePokeball(new Pokeball(new Charmander("char4")));
+
+
+            Battle battle = new Battle(trainer1, trainer2);
+            battle.Start(trainer1, trainer2);
+
+            
             string answer;
             while (true)
             {
@@ -232,4 +214,50 @@ public class Trainer
     {
         Console.WriteLine(name + " Returns: " + pokemon.GetName());
     }
+    
+    
+    
 }
+public class Battle
+{
+    private static int rounds;
+    private Trainer trainer1;
+    private Trainer trainer2;
+    private static int trainer1win;
+    private static int trainer2win;
+
+    public Battle(Trainer trainer1,Trainer trainer2)
+    {
+        this.trainer1 = trainer1;
+        this.trainer2 = trainer2;
+        rounds = 0;
+        trainer1win = 0;
+        trainer2win = 0;
+
+
+
+    }
+
+    public void Start(Trainer trainer1, Trainer trainer2)
+    {
+        
+        for (int x = 0; x < trainer1.belt.Count || x < trainer2.belt.Count; x++)
+        {
+            if (x < trainer1.belt.Count)
+            {
+                trainer1.throwPokeball();
+                trainer1.returnPokemon(trainer1.belt[x].Pokemon);
+            }
+            if (x < trainer2.belt.Count)
+            {
+                trainer2.throwPokeball();
+                trainer2.returnPokemon(trainer2.belt[x].Pokemon);
+            }
+        }
+
+    }
+    
+}
+
+
+
